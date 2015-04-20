@@ -5,12 +5,11 @@ class profile_puppetmaster (
   $puppetmaster = 'puppet',
 ) {
   class { '::puppet':
-    dns_alt_names               => ['puppet',$certname,$::hostname,$::fqdn],
+    dns_alt_names               => ['puppet',$certname],
     puppetmaster                => $puppetmaster,
     server                      => true,
     server_ca                   => false,
     server_ca_proxy             => "https://${ca_server}:8140",
-    server_certname             => $certname,
     server_external_nodes       => '',
     server_foreman              => false,
     server_puppetdb_host        => $puppetdb,
