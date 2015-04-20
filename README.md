@@ -11,7 +11,3 @@
     vagrant up
     
 ## Interfaces
-
-### foreman
-
-http://192.168.21.132
