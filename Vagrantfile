@@ -65,7 +65,7 @@ Vagrant.configure("2") do |config|
       puppetmaster_config.vm.provision :hosts
       puppetmaster_config.vm.provision :shell, inline: 'sudo cp /vagrant/files/hiera.yaml /etc/puppet/hiera.yaml'
       puppetmaster_config.vm.provision :shell, inline: 'sudo cp /vagrant/files/puppetmaster/puppet.conf /etc/puppet/puppet.conf'
-      puppetmaster_config.vm.provision 'shell', inline: "sudo puppet agent -t"
+      puppetmaster_config.vm.provision 'shell', inline: "sudo puppet agent -t --environment #{env}; echo $?"
     end
 
     config.vm.define :node do |node_config|
@@ -73,6 +73,6 @@ Vagrant.configure("2") do |config|
       node_config.vm.network :forwarded_port, guest: 22, host: 2160
       node_config.vm.network :private_network, ip: "192.168.21.160"
       node_config.vm.provision :hosts
-      node_config.vm.provision 'shell', inline: "sudo puppet agent -t --environment #{env} --server puppetmaster.foreman.vagrant"
+      node_config.vm.provision 'shell', inline: "sudo puppet agent -t --environment #{env} --server puppetmaster.foreman.vagrant; echo $?"
     end
 end
