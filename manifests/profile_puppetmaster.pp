@@ -15,6 +15,7 @@ class profile_puppetmaster (
     server_foreman              => false,
     server_puppetdb_host        => $puppetdb,
     server_reports              => 'store, puppetdb',
+    runmode                     => 'none',
     server_storeconfigs_backend => 'puppetdb',
   }
 }

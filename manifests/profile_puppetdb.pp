@@ -1,10 +1,11 @@
 class profile_puppetdb () {
   class { '::puppetdb':
-    listen_address  => $::fqdn,
-    manage_firewall => false,
+    ssl_listen_address => '0.0.0.0',
+    manage_firewall    => false,
   }
   class { '::puppetdb::master::config':
-    restart_puppet      => false,
     manage_storeconfigs => false,
+    puppetdb_server     => $::fqdn,
+    restart_puppet      => false,
   }
 }
