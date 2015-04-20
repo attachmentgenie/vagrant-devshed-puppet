@@ -5,7 +5,6 @@ class profile_puppetmaster (
   $puppetmaster = 'puppet',
 ) {
   class { '::puppet':
-    dns_alt_names               => ['puppet',$certname],
     puppetmaster                => $puppetmaster,
     server                      => true,
     server_ca                   => false,
