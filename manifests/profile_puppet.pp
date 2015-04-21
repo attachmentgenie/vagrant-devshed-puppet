@@ -1,5 +1,6 @@
 class profile_puppet (
   $allow_any_crl_auth    = false,
+  $dns_alt_names         = [],
   $puppetmaster          = undef,
   $server                = false,
   $server_ca             = true,
@@ -8,6 +9,7 @@ class profile_puppet (
 ) {
   class { '::puppet':
     allow_any_crl_auth          => $allow_any_crl_auth,
+    dns_alt_names               => $dns_alt_names,
     puppetmaster                => $puppetmaster,
     server                      => $server,
     server_ca                   => $server_ca,
@@ -18,5 +20,14 @@ class profile_puppet (
     server_reports              => 'store, puppetdb',
     runmode                     => 'none',
     server_storeconfigs_backend => 'puppetdb',
+  }
+  if !$server_ca {
+    @@haproxy::balancermember { "puppetmaster-${::hostname}":
+      listening_service => 'puppetmaster',
+      server_names      => $::hostname,
+      ipaddresses       => $::ipaddress_eth1,
+      ports             => '8140',
+      options           => 'check',
+    }
   }
 }

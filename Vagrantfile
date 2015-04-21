@@ -66,11 +66,23 @@ Vagrant.configure("2") do |config|
       puppetmaster_config.vm.provision 'shell', inline: "sudo puppet agent -t --environment #{env}; echo $?"
     end
 
+    config.vm.define :proxy do |proxy_config|
+      proxy_config.vm.host_name = "proxy.foreman.vagrant"
+      proxy_config.vm.network :forwarded_port, guest: 22, host: 2150
+      proxy_config.vm.network :private_network, ip: "192.168.21.150"
+      proxy_config.vm.synced_folder 'manifests/', "/etc/puppet/environments/#{env}/manifests"
+      proxy_config.vm.synced_folder 'modules/', "/etc/puppet/environments/#{env}/modules"
+      proxy_config.vm.synced_folder 'hiera/', '/var/lib/hiera'
+      proxy_config.vm.provision :hosts
+      proxy_config.vm.provision :shell, inline: 'sudo cp /vagrant/files/hiera.yaml /etc/puppet/hiera.yaml'
+      proxy_config.vm.provision 'shell', inline: "sudo puppet agent -t --environment #{env}; echo $?"
+    end
+
     config.vm.define :node do |node_config|
       node_config.vm.host_name = "node.foreman.vagrant"
       node_config.vm.network :forwarded_port, guest: 22, host: 2160
       node_config.vm.network :private_network, ip: "192.168.21.160"
       node_config.vm.provision :hosts
-      node_config.vm.provision 'shell', inline: "sudo puppet agent -t --environment #{env} --server puppetmaster.foreman.vagrant; echo $?"
+      node_config.vm.provision 'shell', inline: "sudo puppet agent -t --environment #{env} --server proxy.foreman.vagrant; echo $?"
     end
 end

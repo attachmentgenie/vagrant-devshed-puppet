@@ -1,6 +1,8 @@
 ---
 classes:
   - role_puppetmaster
+profile_puppet::dns_alt_names:
+  - proxy.foreman.vagrant
 profile_puppet::puppetmaster: puppet.foreman.vagrant
 profile_puppet::server: true
 profile_puppet::server_ca: false
