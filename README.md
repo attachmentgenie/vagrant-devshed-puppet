@@ -11,3 +11,7 @@
     vagrant up
     
 ## Interfaces
+
+### puppetdb
+
+http://192.168.21.130:8080

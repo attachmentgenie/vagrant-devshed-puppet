@@ -1,7 +1,8 @@
 class profile_puppetdb () {
   class { '::puppetdb':
-    ssl_listen_address => '0.0.0.0',
+    listen_address     => '0.0.0.0',
     manage_firewall    => false,
+    ssl_listen_address => '0.0.0.0',
   }
   class { '::puppetdb::master::config':
     manage_storeconfigs => false,
