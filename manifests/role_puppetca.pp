@@ -5,7 +5,7 @@ class role_puppetca () {
   class { '::profile_firewall': }
 
   class { '::profile_puppetdb': }
-  class { '::profile_puppetca': }
+  class { '::profile_puppet': }
   Class['::puppet::server::service'] ->
   Class['::puppetdb::server']
 }
