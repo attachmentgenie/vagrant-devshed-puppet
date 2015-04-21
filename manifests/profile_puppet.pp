@@ -21,13 +21,4 @@ class profile_puppet (
     runmode                     => 'none',
     server_storeconfigs_backend => 'puppetdb',
   }
-  if !$server_ca {
-    @@haproxy::balancermember { "puppetmaster-${::hostname}":
-      listening_service => 'puppetmaster',
-      server_names      => $::hostname,
-      ipaddresses       => $::ipaddress_eth1,
-      ports             => '8140',
-      options           => 'check',
-    }
-  }
 }

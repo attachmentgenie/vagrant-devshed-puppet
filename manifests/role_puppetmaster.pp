@@ -4,4 +4,5 @@ class role_puppetmaster () {
   class { '::profile_selinux': } ->
   class { '::profile_firewall': } ->
   class { '::profile_puppet': }
+  class { '::profile_haproxy_balancermember': }
 }
