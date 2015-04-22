@@ -9,14 +9,14 @@
     librarian-puppet install
     vagrant up
     vagrant ssh puppet
-    sudo puppet cert clean puppetmaster.foreman.vagrant
+    sudo puppet cert clean puppetmaster.multi-master.vagrant
     exit
     vagrant ssh puppetmaster
     sudo rm -rf /var/lib/puppet/ssl
     exit
     vagrant provision puppetmaster
     vagrant ssh puppet
-    sudo puppet cert --allow-dns-alt-names sign puppetmaster.foreman.vagrant
+    sudo puppet cert --allow-dns-alt-names sign puppetmaster.multi-master.vagrant
     exit
     vagrant provision puppetmaster
     vagrant ssh puppetmaster
@@ -28,4 +28,4 @@
 
 ### puppetdb
 
-http://192.168.21.130:8080
+http://puppet.multi-master.vagrant:8080
