@@ -1,2 +1,3 @@
 ---
 profile_firewall::ensure: stopped
+profile_puppet::puppetmaster: puppet.multi-master.vagrant
