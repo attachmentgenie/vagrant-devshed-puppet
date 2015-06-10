@@ -31,7 +31,8 @@ Vagrant.configure("2") do |config|
 ###############################################################################
 # Global Provisioning settings                                                #
 ###############################################################################
-    env = 'production'
+    env  = 'production'
+    R10K = "r10k deploy environment -pv"
 
 ###############################################################################
 # Global VirtualBox settings                                                  #
@@ -68,14 +69,12 @@ Vagrant.configure("2") do |config|
       puppetmaster_config.vm.host_name = "puppetmaster.multi-master.vagrant"
       puppetmaster_config.vm.network :forwarded_port, guest: 22, host: 2140
       puppetmaster_config.vm.network :private_network, ip: "192.168.43.140"
-      puppetmaster_config.vm.synced_folder 'manifests/', "/etc/puppet/environments/#{env}/manifests"
-      puppetmaster_config.vm.synced_folder 'modules/', "/etc/puppet/environments/#{env}/modules"
-      puppetmaster_config.vm.synced_folder 'hiera/', '/var/lib/hiera'
       puppetmaster_config.vm.provision :shell, inline: 'sudo cp /vagrant/files/hiera.yaml /etc/puppet/hiera.yaml'
       puppetmaster_config.vm.provision :puppet_server do |puppet|
         puppet.options = "-t --environment #{env}"
         puppet.puppet_server = 'puppet.multi-master.vagrant'
       end
+      puppetmaster_config.vm.provision :shell, inline: R10K
     end
 
     config.vm.define :proxy do |proxy_config|
