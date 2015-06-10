@@ -69,7 +69,7 @@ Vagrant.configure("2") do |config|
       puppetmaster_config.vm.host_name = "puppetmaster.multi-master.vagrant"
       puppetmaster_config.vm.network :forwarded_port, guest: 22, host: 2140
       puppetmaster_config.vm.network :private_network, ip: "192.168.43.140"
-      puppetmaster_config.vm.provision :shell, inline: 'sudo cp /vagrant/files/hiera.yaml /etc/puppet/hiera.yaml'
+      puppetmaster_config.vm.provision :shell, inline: 'sudo cp /vagrant/files/hiera.pm.yaml /etc/puppet/hiera.yaml'
       puppetmaster_config.vm.provision :puppet_server do |puppet|
         puppet.options = "-t --environment #{env}"
         puppet.puppet_server = 'puppet.multi-master.vagrant'
