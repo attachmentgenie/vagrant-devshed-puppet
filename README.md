@@ -1,14 +1,17 @@
 # Creating a disposable test environment
 
 ## Requirements
-    Virtualbox       => https://www.virtualbox.org
-    Vagrant          => http://www.vagrantup.com
-    librarian-puppet => gem install librarian-puppet
+    Virtualbox                 => https://www.virtualbox.org
+    Vagrant                    => http://www.vagrantup.comva
+    vagrant-hostmanager        => vagrant plugin install vagrant-hostmanager
+    vagrant-cachier (optional) => vagrant plugin install vagrant-cachier
 
+## Preparation
+    git submodule update --init
+    
 ## Setup
-    librarian-puppet install
     vagrant up
-    vagrant ssh puppet
+    vagrant ssh puppetca
     sudo puppet cert clean puppetmaster.multi-master.vagrant
     exit
     vagrant ssh puppetmaster

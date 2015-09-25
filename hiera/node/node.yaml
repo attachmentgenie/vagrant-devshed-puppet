@@ -1,4 +1,2 @@
 ---
-classes:
-  - role_node
 profile_puppet::puppetmaster: proxy.multi-master.vagrant

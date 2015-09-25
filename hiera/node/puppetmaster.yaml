@@ -1,6 +1,6 @@
 ---
 classes:
-  - role_puppetmaster
+  - puppetmaster::role_puppetmaster
 profile_puppet::dns_alt_names:
   - proxy.multi-master.vagrant
 profile_puppet::server: true

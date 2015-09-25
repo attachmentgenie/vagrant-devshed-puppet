@@ -1,0 +1,29 @@
+---
+classes:
+  - puppetmaster::role_puppetmaster
+puppetmaster::profile_foreman::plugins:
+  puppetdb:
+    package: 'ruby193-rubygem-puppetdb_foreman'
+puppetmaster::profile_foreman_proxy::foreman_host: puppetca.multi-master.vagrant
+puppetmaster::profile_foreman_proxy::puppetca: true
+puppetmaster::profile_mcollective::client: true
+puppetmaster::profile_mcollective::middleware_hosts:
+ - puppetmaster.multi-master.vagrant
+puppetmaster::profile_puppet::autosign: false
+puppetmaster::profile_puppet::runmode: none
+puppetmaster::profile_puppet::puppetmaster: puppetca.multi-master.vagrant
+puppetmaster::profile_puppet::server: true
+puppetmaster::profile_puppet::server_foreman: true
+puppetmaster::profile_puppet::server_foreman_url: https://puppetca.multi-master.vagrant
+puppetmaster::profile_puppet::server_puppetdb_host: puppetca.multi-master.vagrant
+puppetmaster::profile_puppet::server_reports: 'store, foreman'
+puppetmaster::profile_puppet::server_storeconfigs_backend: 'puppetdb'
+puppetmaster::profile_puppetdb::manage_dbserver: false
+puppetmaster::profile_puppetdb::manage_pg_repo: false
+puppetmaster::stack_puppetmaster::foreman: true
+puppetmaster::stack_puppetmaster::foreman_proxy: true
+puppetmaster::stack_puppetmaster::activemq: true
+puppetmaster::stack_puppetmaster::mcollective: true
+puppetmaster::stack_puppetmaster::mcollective_r10k: true
+puppetmaster::stack_puppetmaster::puppetdb: true
+puppetmaster::stack_puppetmaster::puppetmaster: true

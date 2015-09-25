@@ -1,4 +1,3 @@
 ---
-profile_firewall::ensure: stopped
-profile_puppet::puppetmaster: puppet.l.vagrant
-profile_r10k::puppet_repo_url: 'https://github.com/attachmentgenie/r10k-multi-puppetmaster.git'
+orchestrate::profile_firewall::ensure: stopped
+puppetmaster::profile_r10k::puppet_repo_url: 'https://github.com/attachmentgenie/r10k-multi-puppetmaster.git'
