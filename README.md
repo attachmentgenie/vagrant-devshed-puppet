@@ -10,16 +10,20 @@
     git submodule update --init
     
 ## Setup
-    vagrant up
+    vagrant up puppetca
+    login to foreman and change the following settings
+    administer, settings, puppetdb, puppetdb_address, puppetdb_dashboard_address, puppetdb_enabled => true
+    infrastructure, smart proxies, certificates, autosign entries, new =. *.multimaster.vagrant
+    vagrant up  puppetmaster proxy
     vagrant ssh puppetca
-    sudo puppet cert clean puppetmaster.multi-master.vagrant
+    sudo puppet cert clean puppetmaster.multimaster.vagrant
     exit
     vagrant ssh puppetmaster
     sudo rm -rf /var/lib/puppet/ssl
     exit
     vagrant provision puppetmaster
-    vagrant ssh puppet
-    sudo puppet cert --allow-dns-alt-names sign puppetmaster.multi-master.vagrant
+    vagrant ssh puppetca
+    sudo puppet cert --allow-dns-alt-names sign puppetmaster.multimaster.vagrant
     exit
     vagrant provision puppetmaster
     vagrant ssh puppetmaster
@@ -27,8 +31,12 @@
     exit
     vagrant provision node
     
+    foreman  => https://puppetca.multimaster.vagrant
+    username: admin
+    passwd  : secret
+    puppetdb => http://puppetca.multimaster.vagrant:8080
 ## Interfaces
 
 ### puppetdb
 
-http://puppet.multi-master.vagrant:8080
+http://puppet.multimaster.vagrant:8080

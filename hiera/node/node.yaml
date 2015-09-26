@@ -1,2 +1,2 @@
 ---
-profile_puppet::puppetmaster: proxy.multi-master.vagrant
+profile_puppet::puppetmaster: proxy.multimaster.vagrant
