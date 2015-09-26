@@ -14,22 +14,22 @@
     login to foreman and change the following settings
     administer, settings, puppetdb, puppetdb_address, puppetdb_dashboard_address, puppetdb_enabled => true
     infrastructure, smart proxies, certificates, autosign entries, new =. *.multimaster.vagrant
-    vagrant up  puppetmaster proxy
+    vagrant up  compile proxy
     vagrant ssh puppetca
-    sudo puppet cert clean puppetmaster.multimaster.vagrant
+    sudo puppet cert clean compile.multimaster.vagrant
     exit
-    vagrant ssh puppetmaster
+    vagrant ssh compile
     sudo rm -rf /var/lib/puppet/ssl
     exit
-    vagrant provision puppetmaster
+    vagrant provision compile
     vagrant ssh puppetca
-    sudo puppet cert --allow-dns-alt-names sign puppetmaster.multimaster.vagrant
+    sudo puppet cert --allow-dns-alt-names sign compile.multimaster.vagrant
     exit
-    vagrant provision puppetmaster
-    vagrant ssh puppetmaster
+    vagrant provision compile
+    vagrant ssh compile
     sudo /etc/init.d/httpd restart
     exit
-    vagrant provision node
+    vagrant up node
     
     foreman  => https://puppetca.multimaster.vagrant
     username: admin

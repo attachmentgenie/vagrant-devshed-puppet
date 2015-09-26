@@ -1,4 +1,5 @@
 ---
+# Managed by puppet
 :backends:
   - yaml
 :hierarchy:
