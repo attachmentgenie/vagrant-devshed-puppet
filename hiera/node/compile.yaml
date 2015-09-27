@@ -4,6 +4,8 @@ classes:
 puppetmaster::profile_foreman_proxy::foreman_host: puppetca.multimaster.vagrant
 puppetmaster::profile_foreman_proxy::puppetca: false
 puppetmaster::profile_mcollective::client: false
+puppetmaster::profile_mcollective::middleware_hosts:
+ - puppetca.multimaster.vagrant
 puppetmaster::profile_puppet::allow_any_crl_auth: false
 puppetmaster::profile_puppet::dns_alt_names:
   - proxy.multimaster.vagrant

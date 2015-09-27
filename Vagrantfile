@@ -77,7 +77,7 @@ Vagrant.configure("2") do |config|
       compile_config.vm.network :forwarded_port, guest: 22, host: 2140
       compile_config.vm.network :private_network, ip: "192.168.43.140"
       compile_config.vm.synced_folder 'files/', '/opt/files'
-      compile_config.vm.provision :shell, inline: 'sudo cp /opt/files/hiera.cpml.yaml /etc/puppet/hiera.yaml'
+      compile_config.vm.provision :shell, inline: 'sudo cp /opt/files/hiera.cmpl.yaml /etc/puppet/hiera.yaml'
       compile_config.vm.provision :puppet_server do |puppet|
         puppet.options = "-t --environment #{env} --profile"
         puppet.puppet_server = "puppetca.multimaster.vagrant"

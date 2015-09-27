@@ -8,7 +8,7 @@ puppetmaster::profile_foreman_proxy::foreman_host: puppetca.multimaster.vagrant
 puppetmaster::profile_foreman_proxy::puppetca: true
 puppetmaster::profile_mcollective::client: true
 puppetmaster::profile_mcollective::middleware_hosts:
- - puppetmaster.multimaster.vagrant
+ - puppetca.multimaster.vagrant
 puppetmaster::profile_puppet::autosign: false
 puppetmaster::profile_puppet::puppetmaster: puppetca.multimaster.vagrant
 puppetmaster::profile_puppet::server: true
