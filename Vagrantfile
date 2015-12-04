@@ -25,11 +25,22 @@ Vagrant.configure("2") do |config|
       config.cache.scope = :machine
     end
 
+    # When destroying a node, delete the node from the puppetmaster
+    if Vagrant.has_plugin?("vagrant-triggers")
+      config.trigger.after [:destroy] do
+        target = @machine.config.vm.hostname.to_s
+        puppetmaster = "puppetmaster"
+        if target != puppetmaster
+          system("vagrant ssh #{puppetmaster} -c 'sudo /usr/bin/puppet cert clean #{target}'" )
+        end
+      end
+    end
+
 ###############################################################################
-# Global Provisioning settings                                                #
+# Global provisioning settings                                                #
 ###############################################################################
-    env  = 'production'
-    R10K = "r10k deploy environment -pv"
+    env = 'development'
+    SCRIPT = "sudo puppet agent -t --environment #{env} --server puppet.testlab.vagrant; echo $?"
 
 ###############################################################################
 # Global VirtualBox settings                                                  #
@@ -52,6 +63,7 @@ Vagrant.configure("2") do |config|
 ###############################################################################
 # VM definitions                                                              #
 ###############################################################################
+    config.vm.synced_folder ".", "/vagrant", disabled: true
     config.vm.synced_folder ".", "/vagrant", disabled: true
     config.vm.define :puppetca do |puppetca_config|
       config.vm.provider "virtualbox" do |v|
