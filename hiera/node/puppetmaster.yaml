@@ -4,6 +4,8 @@ classes:
 puppetmaster::profile_foreman_proxy::puppetca: true
 puppetmaster::profile_puppet::server: true
 puppetmaster::profile_puppet::server_foreman: true
+puppetmaster::profile_puppet::server_common_modules_path:
+  - "/etc/puppet/environments/devshed"
 puppetmaster::stack_puppetmaster::foreman: true
 puppetmaster::stack_puppetmaster::foreman_proxy: true
 puppetmaster::stack_puppetmaster::puppetdb: true
