@@ -22,8 +22,3 @@
     username: admin
     passwd  : secret
     puppetdb => http://puppetmaster.devshed.vagrant:8080
-## Interfaces
-
-### puppetdb
-
-http://puppet.devshed.vagrant:8080
