@@ -3,13 +3,6 @@
 
 Vagrant.configure("2") do |config|
   ###############################################################################
-  # Base box                                                                    #
-  ###############################################################################
-  config.vm.box              = "puppetlabs/centos-6.6-64-puppet"
-  config.vm.box_version      = '1.0.1'
-  config.vm.box_check_update = false
-
-  ###############################################################################
   # Global plugin settings                                                      #
   ###############################################################################
   plugins = ["vagrant-hostmanager"]
@@ -36,10 +29,19 @@ Vagrant.configure("2") do |config|
   end
 
   ###############################################################################
+  # Global Node list                                                            #
+  ###############################################################################
+  require 'yaml'
+  if File.file?('nodes.yaml')
+    nodes = YAML.load_file('nodes.yaml')
+  elsif File.file?('nodes.yaml.dist')
+    nodes = YAML.load_file('nodes.yaml.dist')
+  end
+
+  ###############################################################################
   # Global provisioning settings                                                #
   ###############################################################################
   env = 'production'
-  SCRIPT = "sudo puppet agent -t --environment #{env} --server puppet.testlab.vagrant; echo $?"
 
   ###############################################################################
   # Global VirtualBox settings                                                  #
@@ -69,7 +71,10 @@ Vagrant.configure("2") do |config|
       v.memory = 2048
       v.cpus   = 2
     end
-    puppetmaster_config.vm.host_name = "puppetmaster.devshed.vagrant"
+    puppetmaster_config.vm.box              = "puppetlabs/centos-6.6-64-puppet"
+    puppetmaster_config.vm.box_version      = '1.0.1'
+    puppetmaster_config.vm.box_check_update = false
+    puppetmaster_config.vm.host_name        = "puppetmaster.devshed.vagrant"
     puppetmaster_config.vm.network :forwarded_port, guest: 22, host: 24230
     puppetmaster_config.vm.network :private_network, ip: "192.168.242.130"
     puppetmaster_config.vm.synced_folder 'devshed/', "/etc/puppet/environments/devshed"
@@ -85,24 +90,31 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  config.vm.define :centos6 do |centos6_config|
-    centos6_config.vm.host_name = "centos6.devshed.vagrant"
-    centos6_config.vm.network :forwarded_port, guest: 22, host: 24240
-    centos6_config.vm.network :private_network, ip: "192.168.242.140"
-    centos6_config.vm.provision :puppet_server do |puppet|
-      puppet.options = "-t --environment #{env}"
-      puppet.puppet_server = "puppetmaster.devshed.vagrant"
-    end
-  end
-
-  config.vm.define :centos7 do |centos7_config|
-    centos7_config.vm.box = "puppetlabs/centos-7.0-64-puppet"
-    centos7_config.vm.host_name = "centos7.devshed.vagrant"
-    centos7_config.vm.network :forwarded_port, guest: 22, host: 24241
-    centos7_config.vm.network :private_network, ip: "192.168.242.142"
-    centos7_config.vm.provision :puppet_server do |puppet|
-      puppet.options = "-t --environment #{env}"
-      puppet.puppet_server = "puppetmaster.devshed.vagrant"
+  nodes.each do |node|
+    config.vm.define node["name"] do |srv|
+      srv.vm.box                = node["box"]
+      if node["box_version"]
+        srv.vm.box_version      = node["box_version"]
+      end
+      if node["box_check_update"]
+        srv.vm.box_check_update = node["box_check_update"]
+      end
+      srv.vm.hostname           = node["hostname"]
+      if node["ports"]
+        node["ports"].each do |port|
+          srv.vm.network :forwarded_port, guest: port["guest"], host: port["host"]
+        end
+      end
+      srv.vm.network :private_network, ip: node["ip"]
+      if node["synced_folders"]
+        node["synced_folders"].each do |folder|
+          srv.vm.synced_folder folder["src"], folder["dst"]
+        end
+      end
+      srv.vm.provision :puppet_server do |puppet|
+        puppet.options = "-t --environment #{env}"
+        puppet.puppet_server = "puppetmaster.devshed.vagrant"
+      end
     end
   end
 end

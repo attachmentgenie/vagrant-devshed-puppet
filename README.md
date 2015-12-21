@@ -1,4 +1,4 @@
-# Creating a disposable test environment
+# Creating a disposable development environment
 
 ## Requirements
     Virtualbox                  => https://www.virtualbox.org
@@ -22,3 +22,9 @@
     username: admin
     passwd  : secret
     puppetdb => http://puppetmaster.devshed.vagrant:8080
+
+## Node definitions
+
+Copy the example file and modify to your needs.
+
+    cp nodes.yaml.dist nodes.yaml

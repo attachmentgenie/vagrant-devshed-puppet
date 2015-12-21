@@ -1,0 +1,19 @@
+---
+- name: centos6
+  hostname: centos6.devshed.vagrant
+  box: puppetlabs/centos-6.6-64-puppet
+  box_version: '1.0.1'
+  box_check_update: false
+  ip: 192.168.42.142
+  ports:
+    - guest: 22
+      host: 2223
+- name: centos7
+  hostname: centos7.devshed.vagrant
+  box: puppetlabs/centos-7.0-64-puppet
+  box_version: '1.0.1'
+  box_check_update: false
+  ip: 192.168.42.143
+  ports:
+    - guest: 22
+      host: 2224
