@@ -76,7 +76,7 @@ Vagrant.configure("2") do |config|
     puppetmaster_config.vm.box_check_update = false
     puppetmaster_config.vm.host_name        = "puppetmaster.devshed.vagrant"
     puppetmaster_config.vm.network :forwarded_port, guest: 22, host: 24230
-    puppetmaster_config.vm.network :private_network, ip: "192.168.242.130"
+    puppetmaster_config.vm.network :private_network, ip: "192.168.42.130"
     puppetmaster_config.vm.synced_folder 'devshed/', "/etc/puppet/environments/devshed"
     puppetmaster_config.vm.synced_folder 'manifests/', "/etc/puppet/environments/#{env}/manifests"
     puppetmaster_config.vm.synced_folder 'modules/', "/etc/puppet/environments/#{env}/modules"
