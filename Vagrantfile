@@ -65,7 +65,6 @@ Vagrant.configure("2") do |config|
   # VM definitions                                                              #
   ###############################################################################
   config.vm.synced_folder ".", "/vagrant", disabled: true
-  config.vm.synced_folder ".", "/vagrant", disabled: true
   config.vm.define :puppetmaster do |puppetmaster_config|
     config.vm.provider "virtualbox" do |v|
       v.memory = 2048
