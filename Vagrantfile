@@ -76,16 +76,16 @@ Vagrant.configure("2") do |config|
     puppetmaster_config.vm.host_name        = "puppetmaster.devshed.vagrant"
     puppetmaster_config.vm.network :forwarded_port, guest: 22, host: 24230
     puppetmaster_config.vm.network :private_network, ip: "192.168.42.130"
-    puppetmaster_config.vm.synced_folder 'devshed/', "/etc/puppet/environments/devshed"
+    puppetmaster_config.vm.synced_folder 'devshed/', "/devshed"
     puppetmaster_config.vm.synced_folder 'manifests/', "/etc/puppet/environments/#{env}/manifests"
     puppetmaster_config.vm.synced_folder 'modules/', "/etc/puppet/environments/#{env}/modules"
     puppetmaster_config.vm.synced_folder 'hiera/', '/var/lib/hiera'
     puppetmaster_config.vm.provision :puppet do |puppet|
       puppet.options           = "--environment #{env} --profile"
-      puppet.manifests_path    = "manifests"
+      puppet.manifests_path    = "devshed/manifests"
       puppet.manifest_file     = ""
-      puppet.module_path       = "modules"
-      puppet.hiera_config_path = "files/hiera.yaml"
+      puppet.module_path       = "devshed/modules"
+      puppet.hiera_config_path = "devshed/hiera.yaml"
     end
   end
 

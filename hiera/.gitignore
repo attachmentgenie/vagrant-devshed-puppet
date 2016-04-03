@@ -1,4 +1,0 @@
-*
-!environment/production.yaml
-!node/puppetmaster.yaml
-!common.yaml

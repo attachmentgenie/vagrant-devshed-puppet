@@ -2,10 +2,14 @@
 classes:
   - puppetmaster::role_puppetmaster
 puppetmaster::profile_foreman_proxy::puppetca: true
+puppetmaster::profile_puppet::autosign: false
+puppetmaster::profile_puppet::runmode: none
 puppetmaster::profile_puppet::server: true
 puppetmaster::profile_puppet::server_foreman: true
-puppetmaster::profile_puppet::server_common_modules_path:
-  - "/etc/puppet/environments/devshed"
+puppetmaster::profile_puppet::server_reports: 'foreman'
+puppetmaster::profile_puppet::server_storeconfigs_backend: 'puppetdb'
+puppetmaster::profile_puppetdb::manage_dbserver: false
+puppetmaster::profile_puppetdb::manage_pg_repo: false
 puppetmaster::stack_puppetmaster::foreman: true
 puppetmaster::stack_puppetmaster::foreman_proxy: true
 puppetmaster::stack_puppetmaster::puppetdb: true

@@ -1,0 +1,7 @@
+---
+orchestrate::profile_firewall::ensure: stopped
+puppetmaster::profile_foreman_proxy::foreman_host: puppetmaster.devshed.vagrant
+puppetmaster::profile_puppet::puppetmaster: puppetmaster.devshed.vagrant
+puppetmaster::profile_puppet::server_foreman_url: https://puppetmaster.devshed.vagrant
+puppetmaster::profile_puppet::server_puppetdb_host: puppetmaster.devshed.vagrant
+

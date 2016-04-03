@@ -1,72 +1,75 @@
 [submodule "modules/puppetmaster"]
-	path = modules/puppetmaster
+	path = devshed/modules/puppetmaster
 	url = git@github.com:attachmentgenie/attachmentgenie-puppetmaster.git
 [submodule "modules/epel"]
-	path = modules/epel
+	path = devshed/modules/epel
 	url = git@github.com:stahnma/puppet-module-epel.git
 [submodule "modules/ntp"]
-	path = modules/ntp
+	path = devshed/modules/ntp
 	url = git@github.com:puppetlabs/puppetlabs-ntp.git
 [submodule "modules/selinux"]
-	path = modules/selinux
+	path = devshed/modules/selinux
 	url = git@github.com:jfryman/puppet-selinux.git
 [submodule "modules/firewall"]
-	path = modules/firewall
+	path = devshed/modules/firewall
 	url = git@github.com:puppetlabs/puppetlabs-firewall.git
 [submodule "modules/stdlib"]
-	path = modules/stdlib
+	path = devshed/modules/stdlib
 	url = git@github.com:puppetlabs/puppetlabs-stdlib.git
 [submodule "modules/puppet"]
-	path = modules/puppet
+	path = devshed/modules/puppet
 	url = git@github.com:theforeman/puppet-puppet.git
 [submodule "modules/apache"]
-	path = modules/apache
+	path = devshed/modules/apache
 	url = git@github.com:puppetlabs/puppetlabs-apache.git
 [submodule "modules/puppetdb"]
-	path = modules/puppetdb
+	path = devshed/modules/puppetdb
 	url = git@github.com:puppetlabs/puppetlabs-puppetdb.git
 [submodule "modules/inifile"]
-	path = modules/inifile
+	path = devshed/modules/inifile
 	url = git@github.com:puppetlabs/puppetlabs-inifile.git
 [submodule "modules/postgresql"]
-	path = modules/postgresql
+	path = devshed/modules/postgresql
 	url = git@github.com:puppetlabs/puppetlabs-postgresql.git
 [submodule "modules/foreman"]
-	path = modules/foreman
+	path = devshed/modules/foreman
 	url = git@github.com:theforeman/puppet-foreman.git
 [submodule "modules/foreman_proxy"]
-	path = modules/foreman_proxy
+	path = devshed/modules/foreman_proxy
 	url = git@github.com:theforeman/puppet-foreman_proxy.git
 [submodule "modules/tftp"]
-	path = modules/tftp
+	path = devshed/modules/tftp
 	url = git@github.com:theforeman/puppet-tftp.git
 [submodule "modules/mcollective"]
-	path = modules/mcollective
+	path = devshed/modules/mcollective
 	url = git@github.com:puppet-community/puppet-mcollective.git
 [submodule "modules/datacat"]
-	path = modules/datacat
+	path = devshed/modules/datacat
 	url = git@github.com:richardc/puppet-datacat.git
 [submodule "modules/activemq"]
-	path = modules/activemq
+	path = devshed/modules/activemq
 	url = git@github.com:puppetlabs/puppetlabs-activemq.git
 [submodule "modules/orchestrate"]
-	path = modules/orchestrate
+	path = devshed/modules/orchestrate
 	url = git@github.com:attachmentgenie/attachmentgenie-orchestrate.git
 [submodule "modules/timezone"]
-	path = modules/timezone
+	path = devshed/modules/timezone
 	url = git@github.com:attachmentgenie/attachmentgenie-timezone.git
 [submodule "modules/concat"]
-	path = modules/concat
+	path = devshed/modules/concat
 	url = git@github.com:puppetlabs/puppetlabs-concat.git
 [submodule "modules/r10k"]
-	path = modules/r10k
+	path = devshed/modules/r10k
 	url = git@github.com:acidprime/r10k.git
 [submodule "modules/git"]
-	path = modules/git
+	path = devshed/modules/git
 	url = git@github.com:puppetlabs/puppetlabs-git.git
 [submodule "modules/ruby"]
-	path = modules/ruby
+	path = devshed/modules/ruby
 	url = git@github.com:puppetlabs/puppetlabs-ruby.git
 [submodule "modules/haproxy"]
-	path = modules/haproxy
+	path = devshed/modules/haproxy
 	url = git@github.com:puppetlabs/puppetlabs-haproxy.git
+[submodule "devshed/modules/extlib"]
+	path = devshed/modules/extlib
+	url = git@github.com:voxpupuli/puppet-extlib.git
