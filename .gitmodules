@@ -76,3 +76,6 @@
 [submodule "modules/createrepo"]
 	path = modules/createrepo
 	url = git@github.com:pall-valmundsson/puppet-createrepo.git
+[submodule "devshed/modules/memcached"]
+	path = devshed/modules/memcached
+	url = git@github.com:saz/puppet-memcached.git
