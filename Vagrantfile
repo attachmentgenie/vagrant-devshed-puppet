@@ -39,11 +39,6 @@ Vagrant.configure("2") do |config|
   end
 
   ###############################################################################
-  # Global provisioning settings                                                #
-  ###############################################################################
-  env = 'production'
-
-  ###############################################################################
   # Global VirtualBox settings                                                  #
   ###############################################################################
   config.vm.provider 'virtualbox' do |v|
@@ -77,11 +72,11 @@ Vagrant.configure("2") do |config|
     puppetmaster_config.vm.network :forwarded_port, guest: 22, host: 24230
     puppetmaster_config.vm.network :private_network, ip: "192.168.42.130"
     puppetmaster_config.vm.synced_folder 'devshed/', "/devshed"
-    puppetmaster_config.vm.synced_folder 'manifests/', "/etc/puppet/environments/#{env}/manifests"
-    puppetmaster_config.vm.synced_folder 'modules/', "/etc/puppet/environments/#{env}/modules"
+    puppetmaster_config.vm.synced_folder 'manifests/', "/etc/puppet/environments/production/manifests"
+    puppetmaster_config.vm.synced_folder 'modules/', "/etc/puppet/environments/production/modules"
     puppetmaster_config.vm.synced_folder 'hiera/', '/var/lib/hiera'
     puppetmaster_config.vm.provision :puppet do |puppet|
-      puppet.options           = "--environment #{env} --profile"
+      puppet.options           = "--verbose --profile"
       puppet.manifests_path    = "devshed/manifests"
       puppet.manifest_file     = ""
       puppet.module_path       = "devshed/modules"
@@ -111,7 +106,7 @@ Vagrant.configure("2") do |config|
         end
       end
       srv.vm.provision :puppet_server do |puppet|
-        puppet.options = "-t --environment #{env}"
+      puppet.options         = "--verbose --profile"
         puppet.puppet_server = "puppetmaster.devshed.vagrant"
       end
     end
