@@ -59,7 +59,6 @@ Vagrant.configure("2") do |config|
   ###############################################################################
   # VM definitions                                                              #
   ###############################################################################
-  config.vm.synced_folder ".", "/vagrant", disabled: true
   config.vm.define :puppetmaster do |puppetmaster_config|
     config.vm.provider "virtualbox" do |v|
       v.memory = 2048
@@ -71,10 +70,11 @@ Vagrant.configure("2") do |config|
     puppetmaster_config.vm.host_name        = "puppetmaster.devshed.vagrant"
     puppetmaster_config.vm.network :forwarded_port, guest: 22, host: 24230
     puppetmaster_config.vm.network :private_network, ip: "192.168.42.130"
-    puppetmaster_config.vm.synced_folder 'devshed/', "/devshed"
-    puppetmaster_config.vm.synced_folder 'manifests/', "/etc/puppet/environments/production/manifests"
-    puppetmaster_config.vm.synced_folder 'modules/', "/etc/puppet/environments/production/modules"
+    puppetmaster_config.vm.synced_folder 'devshed/', '/devshed'
     puppetmaster_config.vm.synced_folder 'hiera/', '/var/lib/hiera'
+    puppetmaster_config.vm.synced_folder 'manifests/', '/etc/puppet/environments/production/manifests'
+    puppetmaster_config.vm.synced_folder 'modules/', '/etc/puppet/environments/production/modules'
+    puppetmaster_config.vm.synced_folder ".", "/vagrant", disabled: true
     puppetmaster_config.vm.provision :puppet do |puppet|
       puppet.options           = "--verbose --profile"
       puppet.manifests_path    = "devshed/manifests"

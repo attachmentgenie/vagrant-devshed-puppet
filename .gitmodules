@@ -14,7 +14,7 @@
 	path = devshed/modules/firewall
 	url = git@github.com:puppetlabs/puppetlabs-firewall.git
 [submodule "modules/stdlib"]
-	path = devshed/modules/stdlib
+	path = modules/stdlib
 	url = git@github.com:puppetlabs/puppetlabs-stdlib.git
 [submodule "modules/puppet"]
 	path = devshed/modules/puppet
@@ -73,3 +73,6 @@
 [submodule "devshed/modules/extlib"]
 	path = devshed/modules/extlib
 	url = git@github.com:voxpupuli/puppet-extlib.git
+[submodule "modules/createrepo"]
+	path = modules/createrepo
+	url = git@github.com:pall-valmundsson/puppet-createrepo.git
