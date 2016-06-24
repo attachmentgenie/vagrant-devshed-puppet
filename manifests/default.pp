@@ -1,5 +1,6 @@
 # Use hiera as a ENC
 hiera_include('classes',[''])
+$os_packages = hiera('os_packages', [])
 
 # Set some general wisdoms
 Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ] }
@@ -20,10 +21,18 @@ yumrepo { 'localhost':
   descr    => 'Local repo holding rpm packages',
   baseurl  => 'file:///vagrant/repo',
   gpgcheck => 0,
+} ->
+# install some useful packages
+package { $os_packages:
+  ensure => present,
 }
 
 # Set the system up for puppet development.
 package { 'puppet-lint':
   ensure   => 'present',
   provider => 'gem',
+}
+
+class { 'firewall':
+  ensure => stopped,
 }
